@@ -1,13 +1,11 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const Post = require('./models/Post');
-const app = express();
+const keys = require('./config/keys');
 
-const postaus = new Post({
-  track: "Tali",
-  date: new Date(),
-  players: ["Miika", "Oski"]
-})
+mongoose.connect(keys.mongoURI);
+
+const app = express();
 
 app.get('/', (req, res) => res.send("Hello World!"));
 
