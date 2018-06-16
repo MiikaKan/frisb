@@ -1,13 +1,16 @@
 import React, { Component } from "react";
-import MainMenu from "./mainmenu";
-import AppBar from "./appbar/appbar";
+import MainMenu from "components/mainmenu";
+import { Route, Switch } from "react-router";
+import PlayerList from "./playerlist/playerlist";
 
 class App extends Component {
     render() {
         return (
             <div>
-                <AppBar />
-                <MainMenu />
+                <Switch>
+                    <Route exact path="/" component={MainMenu} />
+                    <Route path="/" component={PlayerList} />
+                </Switch>
             </div>
         );
     }

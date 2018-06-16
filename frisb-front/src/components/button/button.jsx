@@ -4,6 +4,9 @@ import styled from "styled-components";
 
 const StyledButton = styled.button`
     display: block;
+    margin: auto;
+    width: 100%;
+    height: 100px;
 `;
 
 export default class Button extends React.Component {
