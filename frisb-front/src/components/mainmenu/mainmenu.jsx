@@ -19,9 +19,10 @@ const MainMenu = () => {
             <AppBar title="Main menu" />
             <MainMenuFlexContainer>
                 <MainMenuFlexSubContainer>
-                    <MenuButton>New game</MenuButton>
-                    <MenuButton>Games</MenuButton>
-                    <MenuButton>Courses</MenuButton>
+                    <MenuButton to="/courses">New game</MenuButton>
+                    <MenuButton to="/games">Games</MenuButton>
+                    <MenuButton to="/groups">Groups</MenuButton>
+                    <MenuButton to="/courses">Courses</MenuButton>
                     <MenuButton to="/players">Players</MenuButton>
                 </MainMenuFlexSubContainer>
             </MainMenuFlexContainer>

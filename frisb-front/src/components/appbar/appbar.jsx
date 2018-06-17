@@ -1,6 +1,9 @@
-import React, { Component } from "react";
+import React from "react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
+import FontAwesome from "react-fontawesome";
+import { withRouter } from "react-router";
+import IconButton from "../shared/iconbutton";
 
 const StyledAppBar = styled.nav`
     width: 100%;
@@ -9,18 +12,45 @@ const StyledAppBar = styled.nav`
     z-index: 1000;
     height: 100px;
     background-color: #1976d2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 `;
 
-export default class AppBar extends Component {
-    render() {
-        return <StyledAppBar>{this.props.title}</StyledAppBar>;
-    }
-}
+const CenteredDiv = styled.div`
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+`;
+
+const AlignLeftDiv = styled.div`
+    margin-right: auto;
+`;
+
+const AlignRightDiv = styled.div`
+    margin-left: auto;
+`;
+
+const AppBar = props => {
+    console.log(props.history);
+    return (
+        <StyledAppBar>
+            {props.history.location.pathname !== "/" ? (
+                <AlignLeftDiv>{<IconButton icon="arrow-left" onClick={() => props.history.goBack()} />}</AlignLeftDiv>
+            ) : (
+                <AlignLeftDiv>{<FontAwesome name="rocket" />}</AlignLeftDiv>
+            )}
+
+            <CenteredDiv>{props.title}</CenteredDiv>
+            <AlignRightDiv>{props.rightIcon}</AlignRightDiv>
+        </StyledAppBar>
+    );
+};
+
+export default withRouter(AppBar);
 
 AppBar.propTypes = {
     title: PropTypes.string,
-    leftIcon: PropTypes.string,
-    rightIcon: PropTypes.string,
-    leftIconAction: PropTypes.func,
+    rightIcon: PropTypes.node,
     rightIconAction: PropTypes.func,
 };
