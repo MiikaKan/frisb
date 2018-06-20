@@ -5,31 +5,17 @@ import FlexContainer from "components/shared/flexContainer";
 import PlayerBox from "./playerbox";
 import IconButton from "../shared/iconbutton";
 import PlayerPopup from "./playerpopup";
+import PlayerService from "playerService";
 
 export default class PlayerList extends Component {
     constructor() {
         super();
 
+        PlayerService.loadPlayers();
         this.state = {
             popupOpen: false,
             popupData: {},
-            players: [
-                {
-                    id: 0,
-                    name: "Jokke",
-                    color: "#ff0000",
-                },
-                {
-                    id: 1,
-                    name: "Oski",
-                    color: "#ff0000",
-                },
-                {
-                    id: 2,
-                    name: "Riku",
-                    color: "#ff0000",
-                },
-            ],
+            players: PlayerService.players,
         };
     }
 
@@ -46,7 +32,13 @@ export default class PlayerList extends Component {
     }
 
     handlePopupSubmit(data) {
-        const players = [...this.state.players];
+        let players;
+        if (this.state.players) {
+            players = [...this.state.players];
+        } else {
+            players = [];
+        }
+
         let editingPlayer = players.find(x => x.id === data.id);
 
         if (editingPlayer) {
@@ -59,13 +51,18 @@ export default class PlayerList extends Component {
         console.log(data, editingPlayer, players);
 
         this.setState(state => ({ players: players }));
+        console.log(players, this.state.players);
+        PlayerService.savePlayers(players);
         this.closePopup();
     }
 
     handlePlayerDelete(index) {
         console.log("DELETE " + index);
 
-        this.setState(state => ({ players: state.players.filter((item, idx) => idx !== index) }));
+        const newPlayers = this.state.players.filter((item, idx) => idx !== index);
+        this.setState({ players: newPlayers });
+
+        PlayerService.savePlayers(newPlayers);
     }
 
     render() {
@@ -74,14 +71,15 @@ export default class PlayerList extends Component {
                 <AppBar title="Players" rightIcon={<IconButton icon="plus" onClick={() => this.togglePopup()} />} />
                 <FlexContainer>
                     <ContentContainer>
-                        {this.state.players.map((p, i) => (
-                            <PlayerBox
-                                handleEdit={() => this.openPopup(p)}
-                                handleDelete={() => this.handlePlayerDelete(i)}
-                                playerData={p}
-                                key={i}
-                            />
-                        ))}
+                        {this.state.players &&
+                            this.state.players.map((p, i) => (
+                                <PlayerBox
+                                    handleEdit={() => this.openPopup(p)}
+                                    handleDelete={() => this.handlePlayerDelete(i)}
+                                    playerData={p}
+                                    key={i}
+                                />
+                            ))}
                     </ContentContainer>
                 </FlexContainer>
                 {this.state.popupOpen && (

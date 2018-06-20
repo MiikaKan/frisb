@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import shortid from "shortid";
 
 export default class PlayerPopup extends React.Component {
     constructor() {
@@ -13,7 +14,11 @@ export default class PlayerPopup extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({ ...this.props.playerData });
+        this.setState({ ...this.props.playerData }, () => {
+            if (this.state.id === null) {
+                this.setState({ id: shortid.generate() });
+            }
+        });
     }
 
     render() {
