@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import MainMenu from "components/mainmenu";
 import { Route, Switch } from "react-router";
 import PlayerList from "./playerlist/playerlist";
+import GameView from "./gameview/gameview";
+import CreateGame from "./creategame";
 
 class App extends Component {
     render() {
@@ -9,7 +11,9 @@ class App extends Component {
             <div>
                 <Switch>
                     <Route exact path="/" component={MainMenu} />
-                    <Route path="/" component={PlayerList} />
+                    <Route path="/newgame" component={CreateGame} />
+                    <Route path="/game" component={GameView} />
+                    <Route path="/players" component={PlayerList} />
                 </Switch>
             </div>
         );
