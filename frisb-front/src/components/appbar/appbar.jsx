@@ -32,7 +32,6 @@ const AlignRightDiv = styled.div`
 `;
 
 const AppBar = props => {
-    console.log(props.history);
     return (
         <StyledAppBar>
             {props.history.location.pathname !== "/" ? (

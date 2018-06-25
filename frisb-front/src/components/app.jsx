@@ -12,7 +12,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/" component={MainMenu} />
                     <Route path="/newgame" component={CreateGame} />
-                    <Route path="/game" component={GameView} />
+                    <Route path="/game/:gameid" component={GameView} />
                     <Route path="/players" component={PlayerList} />
                 </Switch>
             </div>
