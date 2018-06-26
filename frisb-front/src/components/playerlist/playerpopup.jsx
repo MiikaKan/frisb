@@ -21,15 +21,29 @@ export default class PlayerPopup extends React.Component {
         });
     }
 
+    onFormSubmit(event) {
+        event.preventDefault();
+        this.props.onSubmit && this.props.onSubmit({ ...this.state });
+    }
+
     render() {
-        const { color, name, onSubmit, onCancel } = this.props;
+        const { color, onCancel } = this.props;
 
         return (
-            <div>
-                <input value={this.state.name} onChange={evt => this.updateInputvalue(evt)} />
-                <button onClick={() => onCancel && onCancel()}>CANCEL</button>
-                <button onClick={() => onSubmit && onSubmit({ ...this.state })}>SAVE</button>
-            </div>
+            <form onSubmit={evt => this.onFormSubmit(evt)}>
+                <input
+                    type="text"
+                    name="text"
+                    value={this.state.name}
+                    onChange={evt => this.updateInputvalue(evt)}
+                />
+                <input
+                    onClick={() => onCancel && onCancel()}
+                    type="button"
+                    value="CANCEL"
+                />
+                <input type="submit" value="SAVE" />
+            </form>
         );
     }
 
