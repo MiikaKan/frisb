@@ -4,14 +4,25 @@ import { Route, Switch } from "react-router";
 import PlayerList from "./playerlist/playerlist";
 import GameView from "./gameview/gameview";
 import CreateGame from "./creategame";
+import SelectPlayers from "./selectplayers/selectplayers";
+import PlayerService from "playerService";
 
 class App extends Component {
+    componentDidMount() {
+        const players = PlayerService.loadPlayers();
+        console.log(players, PlayerService.players);
+    }
+
     render() {
         return (
             <div>
                 <Switch>
                     <Route exact path="/" component={MainMenu} />
                     <Route path="/newgame" component={CreateGame} />
+                    <Route
+                        path="/selectplayers/:gameid"
+                        component={SelectPlayers}
+                    />
                     <Route path="/game/:gameid" component={GameView} />
                     <Route path="/players" component={PlayerList} />
                 </Switch>

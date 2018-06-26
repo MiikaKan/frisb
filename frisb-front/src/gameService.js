@@ -33,6 +33,6 @@ export default class GameService {
     }
 
     static saveGames(games) {
-        localStorage.setItem("players", JSON.stringify(games || savedGames));
+        localStorage.setItem("games", JSON.stringify(games || savedGames));
     }
 }

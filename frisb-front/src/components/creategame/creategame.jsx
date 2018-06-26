@@ -38,6 +38,6 @@ export default class CreateGame extends React.Component {
 
     createGame() {
         const gameData = GameService.getGameData(null);
-        this.props.history.push("/game/" + gameData.gameid);
+        this.props.history.push("/selectplayers/" + gameData.gameid);
     }
 }
