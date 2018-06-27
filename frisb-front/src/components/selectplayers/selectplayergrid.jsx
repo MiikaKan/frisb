@@ -32,20 +32,17 @@ export default class SelectPlayerGrid extends React.Component {
                 <GridItem color="darkgrey">
                     <GridItemText>New player</GridItemText>
                 </GridItem>
-                {players.map(
-                    (el, i) =>
-                        gameData.players.every(p => {
-                            return p.id !== el.id;
-                        }) && (
-                            <GridItem
-                                key={i}
-                                color={el.color || "lightblue"}
-                                onClick={() => handlePlayerClick(el)}
-                            >
-                                <GridItemText>{el.name}</GridItemText>
-                            </GridItem>
-                        )
-                )}
+                {players &&
+                    players.map(
+                        (el, i) =>
+                            gameData.players.every(p => {
+                                return p.id !== el.id;
+                            }) && (
+                                <GridItem key={i} color={el.color || "lightblue"} onClick={() => handlePlayerClick(el)}>
+                                    <GridItemText>{el.name}</GridItemText>
+                                </GridItem>
+                            )
+                    )}
             </Grid>
         );
     }
