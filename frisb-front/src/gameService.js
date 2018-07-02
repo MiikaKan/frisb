@@ -4,16 +4,19 @@ let savedGames = [];
 
 export default class GameService {
     static loadGames() {
-        const games = JSON.parse(localStorage.getItem("games"));
+        const gamesData = localStorage.getItem("games");
 
-        if (!games) {
+        if (gamesData.length === 0) {
             savedGames = [];
-            return [];
-        } else return [...savedGames];
+            return savedGames;
+        }
+
+        savedGames = JSON.parse(gamesData);
+
+        return [...savedGames];
     }
 
     static getGameData(gameid) {
-        console.log(gameid, savedGames);
         let gameData = savedGames.find(x => x.gameid === gameid);
         if (!gameData) {
             gameData = {
@@ -22,8 +25,8 @@ export default class GameService {
                 players: [],
                 rounds: 18,
             };
-            console.log("push", gameid);
             savedGames.push(gameData);
+            this.saveGames(savedGames);
         }
         return gameData;
     }

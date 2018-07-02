@@ -2,14 +2,9 @@ import React from "react";
 import AppBar from "../appbar";
 import IconButton from "../shared/iconbutton";
 import ContentContainer from "../shared/contentcontainer";
-import FlexContainer from "../shared/flexContainer";
 import GameService from "gameService";
 
 export default class CreateGame extends React.Component {
-    componentDidMount() {
-        GameService.loadGames();
-    }
-
     render() {
         return (
             <div>

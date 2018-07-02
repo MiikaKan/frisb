@@ -21,8 +21,6 @@ export default class SelectPlayers extends React.Component {
         const gameid = match.params.gameid;
         const gameData = GameService.getGameData(gameid);
 
-        GameService.saveGames();
-
         this.setState({
             gameData: gameData,
         });
@@ -33,11 +31,12 @@ export default class SelectPlayers extends React.Component {
         gameData.players.push(player);
 
         this.setState({ gameData: gameData });
+
+        GameService.saveGames();
     }
 
     render() {
         const { gameData } = this.state;
-        console.log(gameData);
 
         return (
             <div>

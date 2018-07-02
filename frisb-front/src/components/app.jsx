@@ -6,11 +6,14 @@ import GameView from "./gameview/gameview";
 import CreateGame from "./creategame";
 import SelectPlayers from "./selectplayers/selectplayers";
 import PlayerService from "playerService";
+import GameService from "gameService";
 
 class App extends Component {
     componentDidMount() {
         const players = PlayerService.loadPlayers();
+        const games = GameService.loadGames();
         console.log(players, PlayerService.players);
+        console.log(games, GameService.games);
     }
 
     render() {
