@@ -4,6 +4,7 @@ import IconButton from "../shared/iconbutton";
 import GameService from "gameService";
 import FlexContainer from "../shared/flexContainer";
 import ContentContainer from "../shared/contentcontainer";
+import ScoreTable from "./scoretable";
 
 export default class GameView extends React.Component {
     constructor() {
@@ -14,6 +15,8 @@ export default class GameView extends React.Component {
                 players: [],
             },
         };
+
+        this.handleScoreChanged = this.handleScoreChanged.bind(this);
     }
     componentDidMount() {
         const { course, match } = this.props;
@@ -30,8 +33,20 @@ export default class GameView extends React.Component {
         });
     }
 
+    handleScoreChanged(round, player, newValue) {
+        console.log("changed", round, player, newValue);
+        GameService.setScoreForPlayer(
+            this.state.gameData,
+            player.id,
+            round,
+            parseInt(newValue)
+        );
+        GameService.saveGames();
+        console.log(this.state.gameData);
+    }
+
     render() {
-        const { players } = this.state.gameData;
+        const { players, rounds } = this.state.gameData;
 
         return (
             <div>
@@ -46,16 +61,11 @@ export default class GameView extends React.Component {
                 />
                 <FlexContainer>
                     <ContentContainer>
-                        <div>Game view</div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    {players.map(p => (
-                                        <th key={p.id}>{p.name}</th>
-                                    ))}
-                                </tr>
-                            </thead>
-                        </table>
+                        <ScoreTable
+                            players={players}
+                            rounds={rounds}
+                            handleScoreChanged={this.handleScoreChanged}
+                        />
                     </ContentContainer>
                 </FlexContainer>
             </div>

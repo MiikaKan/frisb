@@ -22,13 +22,25 @@ export default class GameService {
             gameData = {
                 gameid: shortid.generate(),
                 courseid: 0,
-                players: [],
                 rounds: 18,
+                players: [],
+                scores: {},
             };
             savedGames.push(gameData);
             this.saveGames(savedGames);
         }
         return gameData;
+    }
+
+    static setScoreForPlayer(gameData, playerId, round, score) {
+        let playerScores = gameData.scores[playerId];
+        if (playerScores === undefined) {
+            playerScores = [].fill(null, 0, 18);
+            playerScores[round] = score;
+            gameData.scores[playerId] = playerScores;
+        } else {
+            playerScores[round] = score;
+        }
     }
 
     static get games() {
