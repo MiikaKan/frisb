@@ -26,6 +26,7 @@ export default class GameService {
                 players: [],
                 scores: {},
                 finished: false,
+                createdAt: new Date(),
             };
             savedGames.push(gameData);
             this.saveGames(savedGames);
@@ -46,6 +47,14 @@ export default class GameService {
         }
 
         return gameData;
+    }
+
+    static getLastUnfinished() {
+        const unFinishedGame = savedGames.filter(g => g.finished === false);
+        const sortedByTime = unFinishedGame.sort(
+            (a, b) => a.createdAt > b.createdAt
+        );
+        return sortedByTime[0];
     }
 
     static finishGame(gameId) {

@@ -19,7 +19,7 @@ export default class GameView extends React.Component {
         this.handleScoreChanged = this.handleScoreChanged.bind(this);
     }
     componentDidMount() {
-        const { course, match } = this.props;
+        const { match } = this.props;
 
         const gameid = match.params.gameid;
 
@@ -35,7 +35,7 @@ export default class GameView extends React.Component {
 
     handleScoreChanged(round, player, newValue) {
         console.log("changed", round, player, newValue);
-        const newValueInt = parseInt(newValue);
+        const newValueInt = parseInt(newValue, 10);
 
         if (isNaN(newValueInt)) return;
 
@@ -55,7 +55,7 @@ export default class GameView extends React.Component {
     }
 
     finishGame() {
-        const gameData = GameService.finishGame(this.state.gameData.gameid);
+        GameService.finishGame(this.state.gameData.gameid);
         this.props.history.push("/");
     }
 

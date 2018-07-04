@@ -2,11 +2,9 @@ import React from "react";
 import AppBar from "../appbar";
 import IconButton from "../shared/iconbutton";
 import ContentContainer from "../shared/contentcontainer";
-import FlexContainer from "../shared/flexContainer";
 import GameService from "gameService";
 import SelectPlayerBox from "./selectplayerbox";
 import SelectPlayerGrid from "./selectplayergrid";
-import PlayerService from "playerService";
 
 export default class SelectPlayers extends React.Component {
     constructor() {
