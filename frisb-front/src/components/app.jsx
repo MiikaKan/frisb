@@ -7,13 +7,17 @@ import CreateGame from "./creategame";
 import SelectPlayers from "./selectplayers/selectplayers";
 import PlayerService from "playerService";
 import GameService from "gameService";
+import CoursesList from "./courseslist";
+import CourseService from "courseService";
 
 class App extends Component {
     componentDidMount() {
         const players = PlayerService.loadPlayers();
         const games = GameService.loadGames();
+        const courses = CourseService.loadCourses();
         console.log(players, PlayerService.players);
         console.log(games, GameService.games);
+        console.log(courses, CourseService.courses);
     }
 
     render() {
@@ -28,6 +32,7 @@ class App extends Component {
                     />
                     <Route path="/game/:gameid" component={GameView} />
                     <Route path="/players" component={PlayerList} />
+                    <Route path="/courses" component={CoursesList} />
                 </Switch>
             </div>
         );

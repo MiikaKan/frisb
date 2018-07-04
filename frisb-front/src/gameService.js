@@ -6,7 +6,7 @@ export default class GameService {
     static loadGames() {
         const gamesData = localStorage.getItem("games");
 
-        if (gamesData.length === 0) {
+        if (!gamesData || gamesData.length === 0) {
             savedGames = [];
             return savedGames;
         }

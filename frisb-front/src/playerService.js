@@ -4,8 +4,10 @@ export default class PlayerService {
     static loadPlayers() {
         savedPlayers = JSON.parse(localStorage.getItem("players"));
 
-        if (!savedPlayers) return [];
-        else return [...savedPlayers];
+        if (!savedPlayers) {
+            savedPlayers = [];
+            return savedPlayers;
+        } else return [...savedPlayers];
     }
 
     static get players() {
