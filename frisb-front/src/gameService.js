@@ -25,6 +25,7 @@ export default class GameService {
                 rounds: 18,
                 players: [],
                 scores: {},
+                finished: false,
             };
             savedGames.push(gameData);
             this.saveGames(savedGames);
@@ -32,8 +33,10 @@ export default class GameService {
         return gameData;
     }
 
-    static setScoreForPlayer(gameData, playerId, round, score) {
+    static setScoreForPlayer(gameId, playerId, round, score) {
+        const gameData = this.getGameData(gameId);
         let playerScores = gameData.scores[playerId];
+
         if (playerScores === undefined) {
             playerScores = [].fill(null, 0, 18);
             playerScores[round] = score;
@@ -41,6 +44,14 @@ export default class GameService {
         } else {
             playerScores[round] = score;
         }
+
+        return gameData;
+    }
+
+    static finishGame(gameId) {
+        const gameData = this.getGameData(gameId);
+        gameData.finished = true;
+        return gameData;
     }
 
     static get games() {
@@ -48,6 +59,8 @@ export default class GameService {
     }
 
     static saveGames(games) {
-        localStorage.setItem("games", JSON.stringify(games || savedGames));
+        if (typeof games === "undefined") games = savedGames;
+        console.log("saving", games);
+        localStorage.setItem("games", JSON.stringify(games));
     }
 }

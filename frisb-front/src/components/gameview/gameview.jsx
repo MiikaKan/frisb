@@ -35,35 +35,46 @@ export default class GameView extends React.Component {
 
     handleScoreChanged(round, player, newValue) {
         console.log("changed", round, player, newValue);
-        GameService.setScoreForPlayer(
-            this.state.gameData,
+        const newValueInt = parseInt(newValue);
+
+        if (isNaN(newValueInt)) return;
+
+        const gameData = GameService.setScoreForPlayer(
+            this.state.gameData.gameid,
             player.id,
             round,
-            parseInt(newValue)
+            newValueInt
         );
         GameService.saveGames();
+
+        this.setState({
+            gameData: gameData,
+        });
+
         console.log(this.state.gameData);
     }
 
-    render() {
-        const { players, rounds } = this.state.gameData;
+    finishGame() {
+        const gameData = GameService.finishGame(this.state.gameData.gameid);
+        this.props.history.push("/");
+    }
 
+    render() {
         return (
             <div>
                 <AppBar
                     title="Tali"
                     rightIcon={
                         <IconButton
-                            icon="plus"
-                            onClick={() => this.togglePopup()}
+                            icon="check"
+                            onClick={() => this.finishGame()}
                         />
                     }
                 />
                 <FlexContainer>
                     <ContentContainer>
                         <ScoreTable
-                            players={players}
-                            rounds={rounds}
+                            game={this.state.gameData}
                             handleScoreChanged={this.handleScoreChanged}
                         />
                     </ContentContainer>
