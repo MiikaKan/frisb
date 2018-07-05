@@ -27,6 +27,8 @@ export default class SelectPlayerGrid extends React.Component {
         const gameData = GameService.getGameData(gameId);
         const players = PlayerService.players;
 
+        console.log(PlayerService.players);
+
         return (
             <Grid>
                 <GridItem color="darkgrey">
@@ -38,7 +40,11 @@ export default class SelectPlayerGrid extends React.Component {
                             gameData.players.every(p => {
                                 return p.id !== el.id;
                             }) && (
-                                <GridItem key={i} color={el.color || "lightblue"} onClick={() => handlePlayerClick(el)}>
+                                <GridItem
+                                    key={i}
+                                    color={el.color || "lightblue"}
+                                    onClick={() => handlePlayerClick(el)}
+                                >
                                     <GridItemText>{el.name}</GridItemText>
                                 </GridItem>
                             )

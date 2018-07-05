@@ -84,8 +84,6 @@ export default class CoursePopup extends React.Component {
     render() {
         const { onCancel } = this.props;
 
-        console.log(this.state.pars, this.state.holes);
-
         return (
             <form onSubmit={evt => this.onFormSubmit(evt)}>
                 <label htmlFor="name">Name</label>

@@ -15,10 +15,9 @@ export default class PlayerService {
     }
 
     static savePlayers(players) {
-        console.log("save", players);
-        localStorage.setItem(
-            "players",
-            JSON.stringify(players || savedPlayers)
-        );
+        if (typeof players === "undefined") players = savedPlayers;
+        console.log("saving players", players);
+        savedPlayers = players;
+        localStorage.setItem("players", JSON.stringify(players));
     }
 }

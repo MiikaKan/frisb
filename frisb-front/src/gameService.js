@@ -69,7 +69,8 @@ export default class GameService {
 
     static saveGames(games) {
         if (typeof games === "undefined") games = savedGames;
-        console.log("saving", games);
+        console.log("saving games", games);
+        savedGames = games;
         localStorage.setItem("games", JSON.stringify(games));
     }
 }

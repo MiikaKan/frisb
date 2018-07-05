@@ -5,6 +5,7 @@ import GameService from "gameService";
 import FlexContainer from "../shared/flexContainer";
 import ContentContainer from "../shared/contentcontainer";
 import ScoreTable from "./scoretable";
+import CourseService from "courseService";
 
 export default class GameView extends React.Component {
     constructor() {
@@ -60,10 +61,15 @@ export default class GameView extends React.Component {
     }
 
     render() {
+        const courseName = this.state.gameData.courseid
+            ? CourseService.getCourseData(this.state.gameData.courseid).name
+            : "";
+        console.log(courseName, this.state.gameData);
+
         return (
             <div>
                 <AppBar
-                    title="Tali"
+                    title={courseName}
                     rightIcon={
                         <IconButton
                             icon="check"

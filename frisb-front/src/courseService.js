@@ -17,6 +17,8 @@ export default class CourseService {
     }
 
     static getCourseData(courseid) {
+        console.log(savedCourses, courseid);
+        if (courseid === undefined) console.trace();
         let courseData = savedCourses.find(x => x.courseid === courseid);
         if (!courseData) {
             courseData = {
@@ -55,7 +57,9 @@ export default class CourseService {
 
     static saveCourses(courses) {
         if (typeof courses === "undefined") courses = savedCourses;
-        console.log("saving", courses);
+        console.log("saving courses", courses);
+        savedCourses = courses;
+        console.trace();
         localStorage.setItem("courses", JSON.stringify(courses));
     }
 }

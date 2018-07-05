@@ -44,12 +44,13 @@ export default class CoursesList extends React.Component {
 
         let editingCourse = courses.find(x => x.courseid === data.courseid);
 
+        data.holes = parseInt(data.holes);
+
         if (editingCourse) {
             const oldId = editingCourse.courseid;
 
             editingCourse = { ...data };
             editingCourse.courseid = oldId;
-            editingCourse.holes = parseInt(editingCourse.holes);
             courses[
                 courses.findIndex(x => x.courseid === editingCourse.courseid)
             ] = editingCourse;
@@ -94,7 +95,7 @@ export default class CoursesList extends React.Component {
                         <p>Courses list works!</p>
                         {this.state.courses.map(c => (
                             <CourseBox
-                                key={c.id}
+                                key={c.courseid}
                                 courseData={c}
                                 handleEdit={() => this.openPopup(c)}
                                 handleDelete={() =>
