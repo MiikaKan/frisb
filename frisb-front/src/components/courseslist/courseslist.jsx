@@ -23,7 +23,7 @@ export default class CoursesList extends React.Component {
     }
 
     togglePopup() {
-        this.setState(old => ({ popupOpen: !old.popupOpen }));
+        this.setState(old => ({ popupOpen: !old.popupOpen, popupData: {} }));
     }
 
     openPopup(courseData) {
@@ -77,6 +77,7 @@ export default class CoursesList extends React.Component {
     }
 
     render() {
+        console.log(this.state.popupData);
         return (
             <React.Fragment>
                 <AppBar
@@ -84,7 +85,7 @@ export default class CoursesList extends React.Component {
                     rightIcon={
                         <IconButton
                             icon="plus"
-                            onClick={() => this.togglePopup()}
+                            onClick={() => this.openPopup()}
                         />
                     }
                 />

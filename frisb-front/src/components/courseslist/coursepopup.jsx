@@ -34,9 +34,9 @@ export default class CoursePopup extends React.Component {
         });
     }
 
-    updateCourseHoles(evt) {
+    updateCourseHoles(howMany) {
         // Dont parse int to allow emptying box
-        const newHoles = evt.target.value;
+        const newHoles = howMany;
         //let newHoles = parseInt(evt.target.value, 10);
 
         //if (isNaN(newHoles)) newHoles = 0;
@@ -100,7 +100,7 @@ export default class CoursePopup extends React.Component {
                     type="number"
                     name="holes"
                     value={this.state.holes}
-                    onChange={evt => this.updateCourseHoles(evt)}
+                    onChange={evt => this.updateCourseHoles(evt.target.value)}
                 />
                 <br />
                 {this.state.pars.map((p, i) => (
