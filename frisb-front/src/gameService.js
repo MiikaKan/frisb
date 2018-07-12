@@ -60,6 +60,7 @@ export default class GameService {
     static finishGame(gameId) {
         const gameData = this.getGameData(gameId);
         gameData.finished = true;
+        GameService.saveGames();
         return gameData;
     }
 
