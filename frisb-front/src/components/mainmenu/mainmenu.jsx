@@ -45,7 +45,7 @@ class MainMenu extends React.Component {
                             </MenuButton>
                         )}
                         <MenuButton to="/newgame">New game</MenuButton>
-                        <MenuButton to="/games">Games</MenuButton>
+                        <MenuButton to="/history">Games</MenuButton>
                         <MenuButton to="/courses">Courses</MenuButton>
                         <MenuButton to="/players">Players</MenuButton>
                     </MainMenuFlexSubContainer>

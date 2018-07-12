@@ -9,6 +9,7 @@ import PlayerService from "playerService";
 import GameService from "gameService";
 import CoursesList from "./courseslist";
 import CourseService from "courseService";
+import HistoryView from "./historyview/historyview";
 
 class App extends Component {
     componentDidMount() {
@@ -31,6 +32,7 @@ class App extends Component {
                         component={SelectPlayers}
                     />
                     <Route path="/game/:gameid" component={GameView} />
+                    <Route path="/history" component={HistoryView} />
                     <Route path="/players" component={PlayerList} />
                     <Route path="/courses" component={CoursesList} />
                 </Switch>
