@@ -1,8 +1,10 @@
 import React from "react";
+import CourseService from "courseService";
 
 export default class ScoreTable extends React.Component {
     render() {
         const { game, handleScoreChanged } = this.props;
+        const courseData = CourseService.getCourseData(game.courseid);
 
         console.log(game);
 
@@ -13,9 +15,11 @@ export default class ScoreTable extends React.Component {
             const row = (
                 <tr key={i}>
                     <td>{i + 1}</td>
+                    <td>{courseData.pars[i]}</td>
                     {game.players.map(p => (
                         <td key={p.id}>
                             <input
+                                type="number"
                                 onBlur={e =>
                                     handleScoreChanged(i, p, e.target.value)
                                 }
@@ -48,7 +52,8 @@ export default class ScoreTable extends React.Component {
                 <table>
                     <thead>
                         <tr>
-                            <th />
+                            <th>#</th>
+                            <th>Par</th>
                             {game.players.map(p => (
                                 <th key={p.id}>{p.name}</th>
                             ))}
