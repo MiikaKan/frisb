@@ -49,6 +49,14 @@ export default class GameService {
         return gameData;
     }
 
+    static getTotalScore(gameData, playerId) {
+        const playerScores = gameData.scores[playerId];
+
+        if (!playerScores) return undefined;
+
+        return playerScores.reduce((acc, curr) => acc + curr);
+    }
+
     static getLastUnfinished() {
         const unFinishedGame = savedGames.filter(g => g.finished === false);
         const sortedByTime = unFinishedGame.sort(
