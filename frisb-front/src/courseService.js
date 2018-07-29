@@ -1,3 +1,5 @@
+import shortid from "shortid";
+
 let savedCourses = [];
 
 export default class CourseService {
@@ -17,18 +19,23 @@ export default class CourseService {
     static getCourseData(courseid) {
         let courseData = savedCourses.find(x => x.courseid === courseid);
         if (!courseData) {
-            // courseData = {
-            //     courseid: shortid.generate(),
-            //     name: "",
-            //     holes: 18,
-            //     pars: Array(18).fill(3),
-            //     createdAt: new Date(),
-            // };
-            // savedCourses.push(courseData);
-            // this.saveCourses(savedCourses);
             console.error("No such course: ", courseid);
             return undefined;
         }
+        return courseData;
+    }
+
+    static newCourse() {
+        const courseData = {
+            courseid: shortid.generate(),
+            name: "",
+            holes: 18,
+            pars: Array(18).fill(3),
+            createdAt: new Date(),
+        };
+        savedCourses.push(courseData);
+        this.saveCourses(savedCourses);
+
         return courseData;
     }
 

@@ -19,7 +19,7 @@ export default class CoursePopup extends React.Component {
         if (this.props.courseData) {
             this.setState({ ...this.props.courseData });
         } else {
-            const courseData = CourseService.getCourseData(null);
+            const courseData = CourseService.newCourse();
             this.setState({ ...courseData });
             CourseService.saveCourses();
         }
