@@ -17,19 +17,19 @@ export default class CourseService {
     }
 
     static getCourseData(courseid) {
-        console.log(savedCourses, courseid);
-        if (courseid === undefined) console.trace();
         let courseData = savedCourses.find(x => x.courseid === courseid);
         if (!courseData) {
-            courseData = {
-                courseid: shortid.generate(),
-                name: "",
-                holes: 18,
-                pars: Array(18).fill(3),
-                createdAt: new Date(),
-            };
-            savedCourses.push(courseData);
-            this.saveCourses(savedCourses);
+            // courseData = {
+            //     courseid: shortid.generate(),
+            //     name: "",
+            //     holes: 18,
+            //     pars: Array(18).fill(3),
+            //     createdAt: new Date(),
+            // };
+            // savedCourses.push(courseData);
+            // this.saveCourses(savedCourses);
+            console.error("No such course: ", courseid);
+            return undefined;
         }
         return courseData;
     }

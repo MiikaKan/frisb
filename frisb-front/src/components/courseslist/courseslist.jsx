@@ -78,7 +78,6 @@ export default class CoursesList extends React.Component {
     }
 
     render() {
-        console.log(this.state.popupData);
         return (
             <React.Fragment>
                 <AppBar

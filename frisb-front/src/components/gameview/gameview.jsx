@@ -61,10 +61,17 @@ export default class GameView extends React.Component {
     }
 
     render() {
-        const courseName = this.state.gameData.courseid
-            ? CourseService.getCourseData(this.state.gameData.courseid).name
-            : "";
-        console.log(courseName, this.state.gameData);
+        if (
+            !CourseService.courses.some(
+                c => c.courseid === this.state.gameData.courseid
+            )
+        )
+            return <p>Loading...</p>;
+
+        const courseData = CourseService.getCourseData(
+            this.state.gameData.courseid
+        );
+        const courseName = courseData.name;
 
         return (
             <div>

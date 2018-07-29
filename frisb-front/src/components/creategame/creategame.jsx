@@ -74,7 +74,7 @@ export default class CreateGame extends React.Component {
     }
 
     createGame() {
-        const gameData = GameService.getGameData(null);
+        const gameData = GameService.getGameData();
         gameData.courseid = this.state.courseid;
         GameService.saveGames();
         this.props.history.push("/selectplayers/" + gameData.gameid);
