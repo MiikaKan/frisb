@@ -1,5 +1,3 @@
-import shortid from "shortid";
-
 let savedCourses = [];
 
 export default class CourseService {
@@ -39,7 +37,6 @@ export default class CourseService {
         courseData.holes = holes;
 
         courseData.holes.fill(3, courseData.length - 1, holes);
-        console.log(courseData.holes);
 
         this.saveCourses();
     }
@@ -59,7 +56,6 @@ export default class CourseService {
         if (typeof courses === "undefined") courses = savedCourses;
         console.log("saving courses", courses);
         savedCourses = courses;
-        console.trace();
         localStorage.setItem("courses", JSON.stringify(courses));
     }
 }

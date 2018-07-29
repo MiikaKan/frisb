@@ -16,8 +16,6 @@ export default class CreateGame extends React.Component {
     }
 
     handleCourseChanged(event) {
-        console.log(event.target.value);
-
         const newValue = event.target.value;
 
         if (newValue === "none") return;
@@ -26,8 +24,6 @@ export default class CreateGame extends React.Component {
     }
 
     render() {
-        console.log(CourseService.courses);
-
         return (
             <div>
                 <AppBar

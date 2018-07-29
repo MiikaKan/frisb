@@ -27,8 +27,6 @@ export default class SelectPlayerGrid extends React.Component {
         const gameData = GameService.getGameData(gameId);
         const players = PlayerService.players;
 
-        console.log(PlayerService.players);
-
         return (
             <Grid>
                 <GridItem color="darkgrey">

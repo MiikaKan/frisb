@@ -9,7 +9,6 @@ import HistoryNode from "./historynode";
 export default class HistoryView extends React.Component {
     render() {
         const games = GameService.games;
-        console.log(games);
 
         return (
             <React.Fragment>

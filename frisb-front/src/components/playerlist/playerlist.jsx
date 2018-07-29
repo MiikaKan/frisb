@@ -48,18 +48,15 @@ export default class PlayerList extends Component {
             players.push(data);
         }
 
-        console.log(data, editingPlayer, players);
-
         this.setState(state => ({ players: players }));
-        console.log(players, this.state.players);
         PlayerService.savePlayers(players);
         this.closePopup();
     }
 
     handlePlayerDelete(index) {
-        console.log("DELETE " + index);
-
-        const newPlayers = this.state.players.filter((item, idx) => idx !== index);
+        const newPlayers = this.state.players.filter(
+            (item, idx) => idx !== index
+        );
         this.setState({ players: newPlayers });
 
         PlayerService.savePlayers(newPlayers);
@@ -68,14 +65,24 @@ export default class PlayerList extends Component {
     render() {
         return (
             <div>
-                <AppBar title="Players" rightIcon={<IconButton icon="plus" onClick={() => this.togglePopup()} />} />
+                <AppBar
+                    title="Players"
+                    rightIcon={
+                        <IconButton
+                            icon="plus"
+                            onClick={() => this.togglePopup()}
+                        />
+                    }
+                />
                 <FlexContainer>
                     <ContentContainer>
                         {this.state.players &&
                             this.state.players.map((p, i) => (
                                 <PlayerBox
                                     handleEdit={() => this.openPopup(p)}
-                                    handleDelete={() => this.handlePlayerDelete(i)}
+                                    handleDelete={() =>
+                                        this.handlePlayerDelete(i)
+                                    }
                                     playerData={p}
                                     key={i}
                                 />

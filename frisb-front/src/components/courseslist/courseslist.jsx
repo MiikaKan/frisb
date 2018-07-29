@@ -44,7 +44,7 @@ export default class CoursesList extends React.Component {
 
         let editingCourse = courses.find(x => x.courseid === data.courseid);
 
-        data.holes = parseInt(data.holes);
+        data.holes = parseInt(data.holes, 10);
 
         if (editingCourse) {
             const oldId = editingCourse.courseid;
@@ -58,17 +58,12 @@ export default class CoursesList extends React.Component {
             courses.push(data);
         }
 
-        console.log(data, editingCourse, courses);
-
         this.setState({ courses: courses });
-        console.log(courses, this.state.courses);
         CourseService.saveCourses(courses);
         this.closePopup();
     }
 
     handleCourseDelete(id) {
-        console.log("DELETE " + id);
-
         const newCourses = this.state.courses.filter(
             item => item.courseid !== id
         );

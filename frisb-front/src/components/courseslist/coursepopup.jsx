@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import shortid from "shortid";
 import CourseService from "courseService";
 
 export default class CoursePopup extends React.Component {
@@ -17,12 +16,10 @@ export default class CoursePopup extends React.Component {
     }
 
     componentDidMount() {
-        console.log(this.props.courseData);
         if (this.props.courseData) {
             this.setState({ ...this.props.courseData });
         } else {
             const courseData = CourseService.getCourseData(null);
-            console.log({ ...courseData });
             this.setState({ ...courseData });
             CourseService.saveCourses();
         }
@@ -44,32 +41,24 @@ export default class CoursePopup extends React.Component {
         const newCourseData = { ...this.state };
 
         if (newHoles >= this.state.holes) {
-            console.log("PREFILL", newCourseData.pars);
-
             newCourseData.pars = [
                 ...newCourseData.pars,
                 ...Array(newHoles - newCourseData.pars.length).fill(3),
             ];
-            console.log("POSTFILL", newCourseData.pars);
         } else {
             newCourseData.pars = newCourseData.pars.slice(0, newHoles);
         }
-
-        console.log(newHoles, newCourseData.holes, this.state.holes);
         newCourseData.holes = newHoles;
-
         this.setState(newCourseData);
     }
 
     updateHolePar(evt, index) {
         const newPars = this.state.pars;
-        const newPar = parseInt(evt.target.value);
+        const newPar = parseInt(evt.target.value, 10);
 
         if (isNaN(newPar)) return;
 
         newPars[index] = newPar;
-
-        console.log(index);
 
         this.setState({
             pars: newPars,

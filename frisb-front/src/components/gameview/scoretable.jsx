@@ -6,8 +6,6 @@ export default class ScoreTable extends React.Component {
         const { game, handleScoreChanged } = this.props;
         const courseData = CourseService.getCourseData(game.courseid);
 
-        console.log(game);
-
         if (game.players.length === 0) return null;
 
         const rows = [];
